@@ -1,5 +1,4 @@
 import glob
-
 import scipy.io as scio
 import numpy as np
 import pandas as pd
@@ -8,7 +7,7 @@ from statsmodels.sandbox.stats.multicomp import multipletests
 from scipy.stats import rankdata
 #datapath = '/Users/fan/Documents/Code/source_data_hyl/reviewwork/FDR/spearman_and_pearson_data_and_P_R_code/result_review_spearman/sub_01_results_step4_SEEG_DSI_BOLD.mat'
 
-datafile = sorted(glob.glob('/Users/fan/Documents/Code/source_data_hyl/reviewwork/data/Python_test_wm_connect_vs_distance_0129/*.mat'))
+datafile = sorted(glob.glob('/Users/fan/Documents/Code/source_data_hyl/reviewwork/data/Python_test_distance_regress_0201/*.mat'))
 
 
 # rlistPearson = []
@@ -35,7 +34,6 @@ for i in datafile:
         data = scio.loadmat(i)
         box = data['SEEG_distance'][0][j]  # # dsi_seeg dsi_bold seeg_bold
         scorr, pvalue = scipy.stats.spearmanr(box[0], box[1])
-        #print('--correlation:', correlation, '--pvalue:', pvalue)
         rlistSpearman.append(scorr)
         plistSpearman.append(pvalue)
 
@@ -74,12 +72,11 @@ for i in range(0, 106, 7):
 
     resbox = pd.concat([r, fdrp], axis=0)
     resbox.columns = ['0', '1', '2', '3', '4', '5', '6']
-    print('resbox--',resbox)
-    temprp = pd.concat([temprp, resbox], axis=0)
-    print('temprp--', temprp)
 
-temprp.drop(index=[0,1], inplace=True)
-temprp.to_csv('./wm_connect_vs_distance_seeg_bold-spearman0131.csv')
+    temprp = pd.concat([temprp, resbox], axis=0)
+
+temprp.drop(index=[0, 1], inplace=True)
+temprp.to_csv('./distance_regress_seeg_bold-spearman0201.csv')
 
 
 
