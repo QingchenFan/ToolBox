@@ -6,21 +6,20 @@ import pandas as pd
 import scipy.stats
 from statsmodels.sandbox.stats.multicomp import multipletests
 from scipy.stats import rankdata
-#datapath = '/Users/fan/Documents/Code/source_data_hyl/reviewwork/FDR/spearman_and_pearson_data_and_P_R_code/result_review_spearman/sub_01_results_step4_SEEG_DSI_BOLD.mat'
 
-datafile = sorted(glob.glob('/Users/fan/Documents/Code/source_data_hyl/reviewwork/data/Python_test_distance_regress_0201/*.mat'))
+datafile = sorted(glob.glob('/Users/fan/Documents/Code/source_data_hyl/reviewwork/data/Python_test_coherence_0201/*.mat'))
 rlistSpearman = []
 plistSpearman = []
 for i in datafile:
     for j in range(0, 7):
         data = scio.loadmat(i)  # dsi_seeg dsi_bold seeg_bold BOLD_distance
-        data_one = data['dsi_bold'][0][j][0].tolist()
+        data_one = data['seeg_bold'][0][j][0].tolist()
         data1 = pd.DataFrame(data_one, columns=['data_one'])
 
-        data_two = data['dsi_bold'][0][j][1].tolist()
+        data_two = data['seeg_bold'][0][j][1].tolist()
         data2 = pd.DataFrame(data_two, columns=['data_two'])
 
-        covar = data['dsi_bold'][0][j][2].tolist()
+        covar = data['seeg_bold'][0][j][2].tolist()
         data3 = pd.DataFrame(covar, columns=['covar'])
 
         temp = pd.concat([data1, data2], axis=1)
@@ -46,6 +45,7 @@ FDRpspearman = pd.DataFrame(spearmanPvalueFDR, columns=['FDR-p'])
 FDRpspearman = pd.DataFrame(FDRpspearman.values.T, columns=FDRpspearman.index, index=FDRpspearman.columns)
 
 Res = pd.concat([Rvaluespearman, FDRpspearman], axis=0)
+
 #res = pd.concat([temp, Pvaluespearman], axis=0)
 
 #Res.to_csv('./distance_regress-dsi_seeg-spearman0129.csv')
@@ -69,4 +69,4 @@ for i in range(0, 106, 7):
     temprp = pd.concat([temprp, resbox], axis=0)
 
 temprp.drop(index=[0, 1], inplace=True)
-temprp.to_csv('./distance_regress_dsi_bold-spearman0201.csv')
+temprp.to_csv('./coherence_seeg_bold-spearman0202.csv')

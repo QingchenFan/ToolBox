@@ -22,5 +22,6 @@ plt.text(2, -0.70, "r = 0.14\nMAE = 0.71", size=10, bbox=dict(alpha=0.2))
 # 添加标题
 plt.title('General', x=0.5, y=0.95, loc='center')
 plt.savefig('AGE_5kfold_18times.png', dpi=300)
+
 # 显示图形
 plt.show()
