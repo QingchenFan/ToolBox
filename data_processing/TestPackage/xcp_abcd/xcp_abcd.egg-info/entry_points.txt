@@ -1,0 +1,3 @@
+[console_scripts]
+xcp_abcd = xcp_abcd.cli.run:main
+

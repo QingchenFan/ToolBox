@@ -1,0 +1,27 @@
+Metadata-Version: 2.1
+Name: xcp-abcd
+Version: 0.0.1+128.g385125f.dirty
+Summary: xcp abcd
+Home-page: https://github.com/PennLINC/xcp_abcd
+Author: PENNLINC,DAMIENS LAB staff
+Author-email: xcpabcd@pennlinc.io
+Maintainer: az,mb etc
+Maintainer-email: xcpabcd@pennlinc.io
+License: 3-clause BSD
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Image Recognition
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.8
+Requires-Python: >=3.7
+Description-Content-Type: text/x-rst; charset=UTF-8
+Provides-Extra: doc
+Provides-Extra: docs
+Provides-Extra: duecredit
+Provides-Extra: resmon
+Provides-Extra: sentry
+Provides-Extra: tests
+Provides-Extra: all
