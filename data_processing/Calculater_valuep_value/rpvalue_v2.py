@@ -8,10 +8,11 @@ import mat73
 from decimal import Decimal
 from scipy.stats import rankdata
 #datapath = '/Users/fan/Documents/Code/source_data_hyl/reviewwork/FDR/spearman_and_pearson_data_and_P_R_code/result_review_spearman/sub_01_results_step4_SEEG_DSI_BOLD.mat'
-path = '/Users/fan/Documents/Code/source_data_hyl/reviewwork/data/Users/fan/Documents/Code/source_data_hyl/reviewwork/data/Fig2SMtable_SEEGFCBOLDFCpearson_controllingdistance/*.mat'
+path = '/Users/fan/Documents/Code/source_data_hyl/reviewwork/data/Fig2SMtable_SEEGFCBOLDFCpearson_controllingdistance/*.mat'
 # indexn = path.index('controllingdistance')
 # mark = path[indexn:-6]
 mark = 'SEEGFCBOLDFCpearson_controllingdistance'
+print(mark)
 datafile = sorted(glob.glob(path))
 
 
@@ -37,10 +38,11 @@ for i in datafile:
     for j in range(0, 7):
 
         data = mat73.loadmat(i)
-        box = data['SEEGFC_ED'][j]  # # dsi_seeg dsi_bold seeg_bold
-        scorr, pvalue = scipy.stats.spearmanr(box[0], box[1])
-        #scorr, pvalue = scipy.stats.pearsonr(box[0], box[1])
-        print('p:', pvalue)
+        keyname = list(data.keys())[0]
+        print(keyname)
+        box = data[keyname][j]  # # dsi_seeg dsi_bold seeg_bold
+        #scorr, pvalue = scipy.stats.spearmanr(box[0], box[1])
+        scorr, pvalue = scipy.stats.pearsonr(box[0], box[1])
         rlistSpearman.append(scorr)
         plistSpearman.append(pvalue)
 

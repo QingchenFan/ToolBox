@@ -1,9 +1,24 @@
 import scipy.io as scio
 import pingouin as pg
 import pandas as pd
-data = scio.loadmat('/Users/fan/Documents/Code/source_data_hyl/reviewwork/data/Python_test_wm_connect_vs_distance_0129/sub_01_data.mat')
+import h5py
+import mat73
+import scipy.stats
+
+datapath = '/Users/fan/Documents/Code/source_data_hyl/reviewwork/data/Fig2_SEEGFC_BOLDFC_spearman/Fig2_SEEGFC_BOLDFC_spearmancorrelation/sub_02_data.mat'
+data = h5py.File(datapath, 'r')
+data = mat73.loadmat('/Users/fan/Documents/Code/source_data_hyl/reviewwork/data/Fig2SMtable/Fig2SMtable_SEEGFC_ED_spearman/sub_11_data.mat')
 #data = scio.loadmat('/Users/fan/Documents/Code/source_data_hyl/reviewwork/FDR/data/SEEG_BOLD_DSI_vector_for_calcu_corr/sub_01_data.mat')
-print(data)
+print(data['SEEGFC_ED'])
+keyname = list(data.keys())
+print(keyname)
+for j in range(0, 7):
+
+    box = data['SEEGFC_ED'][j]  # # dsi_seeg dsi_bold seeg_bold
+    scorr, pvalue = scipy.stats.spearmanr(box[0], box[1])
+    # scorr, pvalue = scipy.stats.pearsonr(box[0], box[1])
+    print('p:', pvalue)
+
 exit()
 print(data['seeg_bold'])
 print(data['seeg_bold'].shape)

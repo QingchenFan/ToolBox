@@ -7,7 +7,7 @@ import scipy.stats
 from statsmodels.sandbox.stats.multicomp import multipletests
 from scipy.stats import rankdata
 
-datafile = sorted(glob.glob('/Users/fan/Documents/Code/source_data_hyl/reviewwork/data/Python_test_coherence_0201/*.mat'))
+datafile = sorted(glob.glob('/Users/fan/Documents/Code/source_data_hyl/reviewwork/data/Fig2SM_SEEGFCBOLDFCspearman_controllingdistance/Fig2SM_SEEGFCBOLDFCspearman_controllingdistance/*.mat'))
 rlistSpearman = []
 plistSpearman = []
 for i in datafile:
@@ -69,4 +69,4 @@ for i in range(0, 106, 7):
     temprp = pd.concat([temprp, resbox], axis=0)
 
 temprp.drop(index=[0, 1], inplace=True)
-temprp.to_csv('./coherence_seeg_bold-spearman0202.csv')
+temprp.to_csv('./SEEGFCBOLDFCspearman_controllingdistance0202.csv')

@@ -82,3 +82,17 @@ for i in list_3:
 # sns.heatmap(pd.DataFrame(np.round(m1_tril,2)),
 #                  annot=False, vmax=1, vmin=0, xticklabels= False, yticklabels= False, square=True, cmap="RdBu_r")
 # plt.show()
+# ax = sns.scatterplot(x='账单', y='小费', hue='性别', data=tips)
+# x = [-40, -20, 0, 20, 40]
+# ax.set_xticks(x)
+# xlabs = [-40, -20, 0, 20, 40]
+# ax.set_xticklabels(xlabs, fontsize=14) #设置X座标轴刻度标签字体
+# y = [0, 2, 4, 6, 8, 10]
+# ax.set_yticks(y)
+# ylabs = [0, 2, 4, 6, 8, 10]
+# ax.set_yticklabels(ylabs, fontsize=14) #设置Y座标轴刻度标签字体
+# ax.set_ylabel('小费', fontsize=14) #设置Y坐标轴标签字体
+# ax.set_xlabel('账单', fontsize=14) #设置X坐标轴标签字体
+# ax.set_title('简单示例图', fontsize=14) #设置标题字体
+# ax.legend(title = "性别", fontsize = 12, title_fontsize = 14) #设置图例标题、图例标题字体大小、图例字体大小
+
