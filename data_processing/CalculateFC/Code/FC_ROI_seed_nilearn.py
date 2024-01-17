@@ -6,7 +6,7 @@ import glob
 import numpy as np
 loc = pd.read_csv('/Users/qingchen/Documents/Dailywork/Lab/AnDing/6mmFC/MDDTargetSpot.csv')
 
-imgePath = '/Users/qingchen/Documents/Dailywork/Lab/AnDing/6mmFC/sub-001*_bold*'
+imgePath = '/Users/qingchen/Documents/Dailywork/Lab/AnDing/6mmFC/sub-HC010*_bold*'
 image = glob.glob(imgePath)
 
 for i in image:
@@ -14,7 +14,7 @@ for i in image:
     coords = [(10, 20, 30)]
     seed_masker = NiftiSpheresMasker(
         coords,
-        radius=6,
+        radius=2,
         standardize="zscore_sample",
         standardize_confounds="zscore_sample",
         t_r=2,
@@ -81,9 +81,9 @@ for i in image:
     seed_to_voxel_correlations_fisher_z_img = brain_masker.inverse_transform(
         seed_to_voxel_correlations_fisher_z.T
     )
-    seed_to_voxel_correlations_fisher_z_img.to_filename(
-        "./seed_correlation_z.nii.gz"
-    )
+    # seed_to_voxel_correlations_fisher_z_img.to_filename(
+    #     "./seed_correlation_z.nii.gz"
+    # )
 
 
 

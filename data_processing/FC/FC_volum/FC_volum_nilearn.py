@@ -7,21 +7,21 @@ from nilearn.maskers import NiftiLabelsMasker
 
 #  --  加载schaefer template (可设置参数选择合适的模板)
 schaefer_400 = datasets.fetch_atlas_schaefer_2018(n_rois=400, resolution_mm=2)
-atlas_filename = schaefer_400.maps
-labels = schaefer_400.labels
+atlas_filename = schaefer_400.maps    #  atlas_filename  模板数据的路径 string
 
+#labels = schaefer_400.labels          # labels 模板的标签 list
 
 
 masker = NiftiLabelsMasker(
     labels_img=atlas_filename,
-    labels = labels,
+    #labels = labels,
     standardize="zscore_sample",
     standardize_confounds="zscore_sample",
     memory="nilearn_cache",
     verbose=5,
 )
 
-boldpath = './sub-MDD001_task-rest_space-MNI152NLin6Asym_res-2_desc-denoisedSmoothed_bold.nii.gz'
+boldpath = '/Users/qingchen/Documents/code/Data/roi_fc/sub-0062_task-rest_space-MNI152NLin6Asym_res-2_desc-denoisedSmoothed_bold.nii.gz'
 
 # Here we go from nifti files to the signal time series in a numpy
 # array. Note how we give confounds to be regressed out during signal
@@ -53,7 +53,7 @@ from nilearn import plotting
 plotting.plot_matrix(
     correlation_matrix,
     figure=(10, 8),
-    labels=labels,
+    #labels=labels,
     vmax=0.8,
     vmin=-0.8,
     #title="Confounds",

@@ -46,3 +46,15 @@ for i in filename:
 
     plot_hemispheres(surf_lh, surf_rh, array_name=grad, size=(2000, 800), cmap='coolwarm',
                      color_bar=True, label_text=['Grad1', 'Grad2'], zoom=1)
+
+    # Plot Explained Variance
+    import matplotlib.pyplot as plt
+
+    expl_var = gp.lambdas_ / sum(gp.lambdas_)
+
+    plt.figure(figsize=(5, 4))
+    plt.scatter(range(expl_var.size), expl_var * 100, alpha=0.7, color='#00063F')
+    plt.xlabel('Gradient', fontsize=14, fontname='Avenir')
+    plt.ylabel('Explained variance (%)', fontsize=14, fontname='Avenir')
+    plt.xticks(np.arange(len(expl_var)), np.arange(1, len(expl_var) + 1))  # axis ticks start at 1 not 0
+    plt.show()

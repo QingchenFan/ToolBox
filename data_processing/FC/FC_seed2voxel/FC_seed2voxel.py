@@ -10,6 +10,7 @@ from nilearn import plotting
     a.csv文件路径
     b.影像数据路径
     c.mask文件路径
+    d.输出文件路径
  2、本代码使用先验概率图谱，卡阈值0.2生成二值化图谱  
 '''
 
@@ -60,7 +61,7 @@ for i in image:
     print(f"Seed time series shape: ({seed_time_series.shape})")
     print(f"Brain time series shape: ({brain_time_series.shape})")
 
-
+    exit()
     # 种子点与所有灰质体素计算correlation
     seed_to_voxel_correlations = (
             np.dot(brain_time_series.T, seed_time_series) / seed_time_series.shape[0]

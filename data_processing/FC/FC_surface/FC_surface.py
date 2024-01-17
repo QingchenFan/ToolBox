@@ -11,7 +11,7 @@ print('cifti_img-', cifti_img.shape)
 # 获取数据数组和标签数组
 cifti_label_path = './Schaefer2018_400Parcels_7Networks_order.dlabel.nii'
 cifti_label = nib.load(cifti_label_path).get_fdata()
-print(cifti_label.shape)
+print('cifti_label-',cifti_label.shape)
 
 # 获取ROI标签列表
 roilist = []

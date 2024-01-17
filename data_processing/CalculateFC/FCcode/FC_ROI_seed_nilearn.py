@@ -52,7 +52,7 @@ for i in image:
         "Seed-to-voxel correlation: min = %.3f; max = %.3f"
         % (seed_to_voxel_correlations.min(), seed_to_voxel_correlations.max())
     )
-
+    exit()
     from nilearn import plotting
 
     seed_to_voxel_correlations_img = brain_masker.inverse_transform(
