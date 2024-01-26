@@ -10,7 +10,6 @@ from nilearn import plotting
     a.csv文件路径
     b.影像数据路径
     c.mask文件路径
-    d.输出文件路径
  2、本代码使用先验概率图谱，卡阈值0.2生成二值化图谱  
 '''
 
@@ -18,7 +17,9 @@ from nilearn import plotting
 loc = pd.read_csv('/Users/qingchen/Documents/Dailywork/Lab/AnDing/6mmFC/MDDTargetSpot.csv')
 # TODO: 输入数据，修改为：/xxx/xxx/xx/*/*  (保留/*/*)
 imgePath = '/Users/qingchen/Desktop/test/*/*'
+imgePath = '/Users/qingchen/Documents/Dailywork/Lab/AnDing/JJ_seed2roi/check_FC_qingcheng/check_data/pre/session4/*/*'
 image = glob.glob(imgePath)
+
 # TODO: 输入mask文件
 mask = '/Users/qingchen/Documents/code/Data/FC/GMmask.nii.gz'
 
@@ -61,7 +62,7 @@ for i in image:
     print(f"Seed time series shape: ({seed_time_series.shape})")
     print(f"Brain time series shape: ({brain_time_series.shape})")
 
-    exit()
+
     # 种子点与所有灰质体素计算correlation
     seed_to_voxel_correlations = (
             np.dot(brain_time_series.T, seed_time_series) / seed_time_series.shape[0]

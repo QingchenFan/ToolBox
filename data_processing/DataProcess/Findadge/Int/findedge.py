@@ -96,6 +96,6 @@ cx.tick_params(labelsize=100, left=False, bottom=False)  # 控制去掉小刻度
 
 cbar_3 = cx.collections[0].colorbar
 cbar_3.ax.tick_params(labelsize=12, left=False, right=False)
-#plt.savefig('FC.png', dpi=300, bbox_inches='tight')  #bbox_inches='tight' 字体展示完整
+#plt.savefig('FunctionalConnectivity.png', dpi=300, bbox_inches='tight')  #bbox_inches='tight' 字体展示完整
 
 plt.show()

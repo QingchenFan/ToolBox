@@ -14,9 +14,19 @@ def volume_from_cifti(data, axis):
                         dtype=data.dtype)
     vol_data[vox_indices] = data                             # "Fancy indexing"
     return nib.Nifti1Image(vol_data, axis.affine)
+def surf_data_from_cifti(data, axis, surf_name):
+    assert isinstance(axis, nib.cifti2.BrainModelAxis)
+    for name, data_indices, model in axis.iter_structures():  # Iterates over volumetric and surface structures
+        if name == surf_name:                                 # Just looking for a surface
+            data = data.T[data_indices]                       # Assume brainmodels axis is last, move it to front
+            vtx_indices = model.vertex                        # Generally 1-N, except medial wall vertices
+            surf_data = np.zeros((vtx_indices.max() + 1,) + data.shape[1:], dtype=data.dtype)
+            surf_data[vtx_indices] = data
+            return surf_data
+    raise ValueError(f"No structure named {surf_name}")
 
 
-p = '/Volumes/QC/hcout_xcpd/xcp_d/sub-*'
+p = '/Volumes/QC/Dataprocess/hcout_xcpd/xcp_d/sub-*'
 masker = '/Users/qingchen/Documents/code/Data/roi_fc/amygdala_mask_2/ROI_Amygdala_SF_R_MNI.nii.gz'
 #mask = '/Users/qingchen/Documents/code/Data/roi_fc/amygdala_mask/amygdala_l.nii'
 box = glob.glob(p)
@@ -52,7 +62,8 @@ for i in box :
 
 
     CIFTI_STRUCTURE_CORTEX_LEFT_RIGHT = cifti_data[:,0:59412]
-
+    print('--a--',CIFTI_STRUCTURE_CORTEX_LEFT_RIGHT.shape)
+    print('--b--',amgydala_time_series_mean.shape)
     res = []
     for j in range(0,CIFTI_STRUCTURE_CORTEX_LEFT_RIGHT.shape[1]):
         corr= np.corrcoef(amgydala_time_series_mean,CIFTI_STRUCTURE_CORTEX_LEFT_RIGHT[:,j:j+1].T)
@@ -62,7 +73,7 @@ for i in box :
     data_corr = np.array(res)
     savemat('/Volumes/QC/HC_Amygdala_SF_R_FC/'+subId+'_AMGYDALA_SF_R_FC.mat', {'data': data_corr})
     #savemat('/Volumes/QC/HC_Amygdala_L_FC/'+subId+'_AMGYDALA_L_FC.mat', {'data': data_corr})
-
+    exit()
 
 
 

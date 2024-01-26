@@ -45,9 +45,12 @@ def find_martrix_max_value(data_matrix):
 # find_martrix_min_value(z_res)
 # find_martrix_max_value(z_res)
 
-matdata = sio.loadmat('/Users/qingchen/Documents/code/ToolBox/data_processing/CalculateFC/Code/sub06202.mat')
+matdata = sio.loadmat('/Users/qingchen/Documents/code/Data/FC/FC.mat')
 #matdata = sio.loadmat('./Schaefer400_7FC_new.mat')
 data = matdata['data']
+
+# datapath = '/Users/qingchen/Documents/code/Data/FC/sub-06202_task-rest_space-fsLR_atlas-Schaefer417_den-91k_measure-pearsoncorrelation_conmat.pconn.nii'
+# data = nib.load(datapath).get_fdata()
 
 find_martrix_max_value(data)
 
