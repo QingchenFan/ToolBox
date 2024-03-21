@@ -61,7 +61,7 @@ for i in image:
     print(f"Seed time series shape: ({seed_time_series.shape})")
     print(f"Brain time series shape: ({brain_time_series.shape})")
 
-    exit()
+
     # 种子点与所有灰质体素计算correlation
     seed_to_voxel_correlations = (
             np.dot(brain_time_series.T, seed_time_series) / seed_time_series.shape[0]

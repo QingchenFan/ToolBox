@@ -1,15 +1,17 @@
+import os
+import subprocess
 
-from sklearn.cross_decomposition import PLSCanonical
+a = 'export FREESURFER_HOME=/Applications/freesurfer/7.4.1'
+b = 'export SUBJECTS_DIR=$FREESURFER_HOME/subjects'
+c = 'source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh'
 
-X = [[0., 0., 1.], [1.,0.,0.], [2.,2.,2.], [2.,5.,4.]]
-Y = [[0.1, -0.2], [0.9, 1.1], [6.2, 5.9], [11.9, 12.3]]
+os.system(a)
 
-print(X)
-print(Y)
+os.system(b)
 
-plsca = PLSCanonical(n_components=2)
-plsca.fit(X, Y)
-X_c, Y_c = plsca.transform(X, Y)
+os.system(c)
+#subprocess.run(c,shell=True)
 
-print(X_c)
-print(Y_c)
+subprocess.run('freesurfer',shell=True)
+
+#os.system('freesurfer')

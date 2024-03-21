@@ -4,6 +4,7 @@ import numpy as np
 import nibabel as nib
 from nilearn.maskers import NiftiMasker
 from scipy.io import savemat
+import pandas as pd
 from nilearn.image.image import mean_img
 
 
@@ -30,16 +31,22 @@ def surf_data_from_cifti(data, axis, surf_name):
     raise ValueError(f"No structure named {surf_name}")
 
 
-p = '/Volumes/QC/Dataprocess/hcout_xcpd/xcp_d/sub-*'
-masker = '/Users/qingchen/Documents/code/Data/roi_fc/amygdala_mask_2/ROI_Amygdala_SF_R_MNI.nii.gz'
+mark = 'SF_R'  # 1、SF_R  2、SF_L  3、LB_R 4、LB_L  5、CM_R 6、CM_L     MDD_Amygdala_SF_R_FC_CSV
+
+p = '/Volumes/QC/GL/xcpd_out_globalsignal_ymdd/xcp_d/sub-*'
+# TODO:
+masker = '/Users/qingchen/Documents/code/Data/roi_fc/amygdala_mask_2/ROI_Amygdala_'+mark+'_MNI.nii.gz'
 # mask = '/Users/qingchen/Documents/code/Data/roi_fc/amygdala_mask/amygdala_l.nii'
+labelpath = '/Users/qingchen/Documents/code/Data/FC/Schaefer2018_400Parcels_17Networks_order.dlabel.nii'
+label = nib.load(labelpath).get_fdata()
+
 box = glob.glob(p)
 
 for i in box:
     if not os.path.isdir(i):
         continue
     print(i)
-    subId = i[-9:]  # HC  -9:0  MDD -10:0
+    subId = i[-10:]  # HC  -9:0  MDD -10:0
 
     datapath = i + '/func/sub*-denoisedSmoothed_bold.dtseries.nii'
     data = glob.glob(datapath)
@@ -69,8 +76,8 @@ for i in box:
     a_left = surf_data_from_cifti(cifti_data, axes[1], 'CIFTI_STRUCTURE_CORTEX_LEFT')
     a_right = surf_data_from_cifti(cifti_data, axes[1], 'CIFTI_STRUCTURE_CORTEX_RIGHT')
     CIFTI_STRUCTURE_CORTEX_LEFT_RIGHT = np.concatenate((a_left, a_right), axis=0)
-    print('--a--',CIFTI_STRUCTURE_CORTEX_LEFT_RIGHT.shape)
-    print('--b--',amgydala_time_series_mean.shape)
+    print('--CIFTI_STRUCTURE_CORTEX_LEFT_RIGHT--',CIFTI_STRUCTURE_CORTEX_LEFT_RIGHT.shape)
+    print('--amgydala_time_series_mean--',amgydala_time_series_mean.shape)
     #CIFTI_STRUCTURE_CORTEX_LEFT_RIGHT = cifti_data[:, 0:59412]
 
     res = []
@@ -80,10 +87,20 @@ for i in box:
         res.append(corr[0, 1])
 
     data_corr = np.array(res)
-    # savemat('/Volumes/QC/HC_Amygdala_SF_R_FC/' + subId + '_AMGYDALA_SF_R_FC.mat', {'data': data_corr})
+    # TODO:
+    savemat('/Volumes/QC/GL/FC_amygdala_vertex/MDD_Amygdala_'+mark+'_FC/' + subId + '_AMGYDALA_'+mark+'_FC.mat', {'data': data_corr})
     # savemat('/Volumes/QC/HC_Amygdala_L_FC/'+subId+'_AMGYDALA_L_FC.mat', {'data': data_corr})
-    savemat('./amgydala_allvertex.mat',{'data': data_corr})
-    exit()
+
+    dic = {}
+    for j in range(1, 401):
+        index = np.where(label == j)
+        roi = data_corr[index[1].tolist()]
+        dic[j] = roi
+
+    df = pd.DataFrame.from_dict(dic, orient='index').transpose()
+    print(data_corr.shape)
+    # TODO:
+    df.to_csv('/Volumes/QC/GL/FC_amygdala_vertex/MDD_Amygdala_'+mark+'_FC_CSV/' + subId + '_AMGYDALA_'+mark+'_FC.csv')
 
 
 

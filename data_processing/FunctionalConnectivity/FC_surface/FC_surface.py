@@ -70,15 +70,15 @@ label = nib.load(template).get_fdata()
 
 roilist = []
 for i in range(1,401):
-
     index = np.where(label == i)
     roi = cortex_data[index[1],: ]
     roilist.append(np.mean(roi, axis=0))
-print(len(roilist))
+
 
 roiMatrix = np.array(roilist)
 print(roiMatrix.shape)
 resFC = np.corrcoef(roiMatrix)
+
 savemat('./FC.mat',{'data':resFC})
 print(resFC.shape)
 
