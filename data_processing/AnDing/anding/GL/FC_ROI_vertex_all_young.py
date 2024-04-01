@@ -13,6 +13,7 @@ def volume_from_cifti(data, axis):
     data = data.T[axis.volume_mask]  # Assume brainmodels axis is last, move it to front
     volmask = axis.volume_mask  # Which indices on this axis are for voxels?
     vox_indices = tuple(axis.voxel[axis.volume_mask].T)  # ([x0, x1, ...], [y0, ...], [z0, ...])
+
     vol_data = np.zeros(axis.volume_shape + data.shape[1:],  # Volume + any extra dimensions
                         dtype=data.dtype)
     vol_data[vox_indices] = data  # "Fancy indexing"
@@ -31,9 +32,10 @@ def surf_data_from_cifti(data, axis, surf_name):
     raise ValueError(f"No structure named {surf_name}")
 
 
-mark = 'SF_R'  # 1、SF_R  2、SF_L  3、LB_R 4、LB_L  5、CM_R 6、CM_L     MDD_Amygdala_SF_R_FC_CSV
+mark = 'CM_L'  # 1、SF_R  2、SF_L  3、LB_R 4、LB_L  5、CM_R 6、CM_L     MDD_Amygdala_SF_R_FC_CSV
 
-p = '/Volumes/QC/GL/xcpd_out_globalsignal_ymdd/xcp_d/sub-*'
+p = '/Volumes/QCI/GL/xcpd_out_globalsignal_ymdd/xcp_d/sub-*'
+
 # TODO:
 masker = '/Users/qingchen/Documents/code/Data/roi_fc/amygdala_mask_2/ROI_Amygdala_'+mark+'_MNI.nii.gz'
 # mask = '/Users/qingchen/Documents/code/Data/roi_fc/amygdala_mask/amygdala_l.nii'
@@ -46,16 +48,21 @@ for i in box:
     if not os.path.isdir(i):
         continue
     print(i)
+
     subId = i[-10:]  # HC  -9:0  MDD -10:0
 
     datapath = i + '/func/sub*-denoisedSmoothed_bold.dtseries.nii'
     data = glob.glob(datapath)
 
     cifti = nib.load(data[0])
+
     cifti_data = cifti.get_fdata()
+    print(cifti_data)
+
     cifti_hdr = cifti.header
 
-    axes = [cifti_hdr.get_axis(i) for i in range(cifti.ndim)]
+    axes = [cifti_hdr.get_axis(j) for j in range(cifti.ndim)]
+
     a = volume_from_cifti(cifti_data, axes[1])
 
     amgydala_masker = NiftiMasker(
@@ -81,14 +88,20 @@ for i in box:
     #CIFTI_STRUCTURE_CORTEX_LEFT_RIGHT = cifti_data[:, 0:59412]
 
     res = []
+    test = []
     for j in range(0, CIFTI_STRUCTURE_CORTEX_LEFT_RIGHT.shape[0]):
+
+        if not np.all(CIFTI_STRUCTURE_CORTEX_LEFT_RIGHT[j:j + 1,:]):
+            #print('--',j)
+            test.append(j)
         corr = np.corrcoef(amgydala_time_series_mean, CIFTI_STRUCTURE_CORTEX_LEFT_RIGHT[j:j + 1,:])
 
         res.append(corr[0, 1])
-
+    print(len(test))
     data_corr = np.array(res)
+    exit()
     # TODO:
-    savemat('/Volumes/QC/GL/FC_amygdala_vertex/MDD_Amygdala_'+mark+'_FC/' + subId + '_AMGYDALA_'+mark+'_FC.mat', {'data': data_corr})
+    #savemat('/Volumes/QCI/GL/FC_amygdala_vertex_young/MDD_Amygdala_'+mark+'_FC/' + subId + '_AMGYDALA_'+mark+'_FC.mat', {'data': data_corr})
     # savemat('/Volumes/QC/HC_Amygdala_L_FC/'+subId+'_AMGYDALA_L_FC.mat', {'data': data_corr})
 
     dic = {}
@@ -100,7 +113,7 @@ for i in box:
     df = pd.DataFrame.from_dict(dic, orient='index').transpose()
     print(data_corr.shape)
     # TODO:
-    df.to_csv('/Volumes/QC/GL/FC_amygdala_vertex/MDD_Amygdala_'+mark+'_FC_CSV/' + subId + '_AMGYDALA_'+mark+'_FC.csv')
+    #df.to_csv('/Volumes/QCI/GL/FC_amygdala_vertex_young/MDD_Amygdala_'+mark+'_FC_CSV/' + subId + '_AMGYDALA_'+mark+'_FC.csv')
 
 
 
