@@ -2,6 +2,7 @@ import nibabel as nib
 import numpy as np
 import pandas as pd
 
+# TODO: 真实代码
 path = './Gordon333_FreesurferSubcortical.32k_fs_LR.dlabel.nii'
 Gordondataimage = nib.load(path)
 print(Gordondataimage)

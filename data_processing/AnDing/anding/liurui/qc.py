@@ -2,7 +2,7 @@ import glob
 import pandas as pd
 path = '/Volumes/qingchen/anding/checkdata/freesurfer_v2_mdd/freesurfer/sub*'
 data = glob.glob(path)
-
+# 质控 欧拉值
 
 T ={}
 for d in data:

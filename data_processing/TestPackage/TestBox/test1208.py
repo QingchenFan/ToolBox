@@ -1,17 +1,52 @@
-import os
-import subprocess
+# import os
+# import subprocess
+#
+# a = 'export FREESURFER_HOME=/Applications/freesurfer/7.4.1'
+# b = 'export SUBJECTS_DIR=$FREESURFER_HOME/subjects'
+# c = 'source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh'
+#
+# os.system(a)
+#
+# os.system(b)
+#
+# os.system(c)
+# #subprocess.run(c,shell=True)
+#
+# subprocess.run('freesurfer',shell=True)
+#
+# #os.system('freesurfer')
+import csv
 
-a = 'export FREESURFER_HOME=/Applications/freesurfer/7.4.1'
-b = 'export SUBJECTS_DIR=$FREESURFER_HOME/subjects'
-c = 'source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh'
+data = [1, 1, -1, -1]
+filename = 'tc.csv'
 
-os.system(a)
+with open(filename, 'w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(data)
 
-os.system(b)
 
-os.system(c)
-#subprocess.run(c,shell=True)
+import csv
 
-subprocess.run('freesurfer',shell=True)
+# matrix = [
+#     [1, 0, 0, 0],
+#     [1, 0, 0, 0],
+#     [0, 1, 0, 0],
+#     [0, 1, 0, 0],
+#     [0, 1, 0, 0],
+#     [0, 0, 1, 0],
+#     [0, 0, 1, 0],
+#     [0, 0, 0, 1],
+#     [0, 0, 0, 1],
+#     [0, 0, 0, 1]
+# ]
+matrix = [
+    [1,1,-1,-1],
+    [1,-1,1,-1],
+    [1,-1,-1,1],
+    [1,1,1,1]
+]
+filename = 'fc.csv'
 
-#os.system('freesurfer')
+with open(filename, 'w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerows(matrix)

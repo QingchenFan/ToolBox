@@ -5,7 +5,7 @@ import nibabel as nib
 dlablelp = '/Users/qingchen/Documents/code/Data/FC/Schaefer2018_400Parcels_17Networks_order.dlabel.nii'
 dlabel = nib.load(dlablelp).get_fdata()
 
-pdata = pd.read_csv('/Users/qingchen/Desktop/Diagnosis/rightSF.csv')
+pdata = pd.read_csv('/Users/qingchen/Desktop/Interaction/rightSF.csv')
 indx = pdata['index']
 box = []
 for i in indx:

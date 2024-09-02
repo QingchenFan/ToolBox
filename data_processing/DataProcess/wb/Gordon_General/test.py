@@ -1,19 +1,16 @@
+
 import numpy as np
-import pandas as pd
-l = [[6, 1, 2, 3, 4, 5, 1, 2, 6, 7, 7, 8, 1, 2, 5]]
+from scipy.stats import ttest_ind
 
-arr = np.array(l)
-print(arr)
-index = np.where(arr == 1)
-print(index)
+# 定义组1和组2的数据
+group1_data = np.array([1,2,3,4,5,5,6])
+group2_data = np.array([6,7,9,8,5])
 
-arr[[0, 0, 0], [1,  6, 12]]
-arr[index[0], index[1]]=88
-arr[0, 1]
-print(arr)
+# 执行t检验
+t_statistic, p_value = ttest_ind(group1_data, group2_data)
 
-weightpath = './GeneralSum.csv'
-weightdata = pd.read_csv(weightpath)
-print(weightdata)
-res = weightdata['sum'][0]
-print(res)
+# 打印t值和p值
+print("t值:")
+print(t_statistic)
+print("p值:")
+print(p_value)

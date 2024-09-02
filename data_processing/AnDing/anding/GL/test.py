@@ -61,10 +61,64 @@ import pandas as pd
 #
 # for i,j in enumerate(a,res):
 #     print(i,'--',j)
-import pandas as pd
-path = '/Users/qingchen/Desktop/results_CM_R_list.csv'
-pd.set_option('display.max_rows', None)  # 设置为None以显示所有行
-pd.set_option('display.max_columns', None)
-a = pd.read_csv(path)
-list = []
-list.append(a.iloc[1,:])
+# import pandas as pd
+# path = '/Users/qingchen/Desktop/results_CM_R_list.csv'
+# pd.set_option('display.max_rows', None)  # 设置为None以显示所有行
+# pd.set_option('display.max_columns', None)
+# a = pd.read_csv(path)
+# list = []
+# list.append(a.iloc[1,:])
+# import pandas as pd
+# from nilearn.datasets import fetch_localizer_contrasts
+#
+# n_subjects = 16
+# data = fetch_localizer_contrasts(
+#     ["left vs right button press"],
+#     n_subjects,
+#     legacy_format=False,
+# )
+# second_level_input = data["cmaps"]
+# design_matrix = pd.DataFrame(
+#     [1] * len(second_level_input), columns=["intercept"]
+# )
+# from nilearn.glm.second_level import SecondLevelModel
+#
+# second_level_model = SecondLevelModel(smoothing_fwhm=8.0, n_jobs=2)
+# second_level_model = second_level_model.fit(
+#     second_level_input, design_matrix=design_matrix
+# )
+# z_map = second_level_model.compute_contrast(output_type="z_score")
+# print(z_map)
+import matplotlib.pyplot as plt
+import numpy as np
+
+import mne
+from mne.datasets import sample
+from mne.stats import f_mway_rm, f_threshold_mway_rm, fdr_correction
+from mne.time_frequency import tfr_morlet
+
+print(__doc__)
+def stat_fun(*args):
+    return f_mway_rm(
+        np.swapaxes(args, 1, 0),
+        factor_levels=factor_levels,
+        effects=effects,
+        return_pvals=False,
+    )[0]
+
+
+# # The ANOVA returns a tuple f-values and p-values, we will pick the former.
+# pthresh = 0.001  # set threshold rather high to save some time
+# f_thresh = f_threshold_mway_rm(n_replications, factor_levels, effects, pthresh)
+# tail = 1  # f-test, so tail > 0
+# n_permutations = 256  # Save some time (the test won't be too sensitive ...)
+# F_obs, clusters, cluster_p_values, h0 = mne.stats.permutation_cluster_test(
+#     epochs_power,
+#     stat_fun=stat_fun,
+#     threshold=f_thresh,
+#     tail=tail,
+#     n_jobs=None,
+#     n_permutations=n_permutations,
+#     buffer_size=None,
+#     out_type="mask",
+# )
