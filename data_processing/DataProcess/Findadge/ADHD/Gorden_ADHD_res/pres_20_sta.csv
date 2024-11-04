@@ -1,0 +1,14 @@
+﻿roi,num
+Default,10
+Auditory,8
+Visual,8
+CinguloOperc,7
+VentralAttn,7
+subcortical,7
+SMhand,4
+DorsalAttn,3
+FrontoParietal,2
+SMmouth,2
+CinguloParietal,1
+RetrosplenialTemporal,1
+Salience,1

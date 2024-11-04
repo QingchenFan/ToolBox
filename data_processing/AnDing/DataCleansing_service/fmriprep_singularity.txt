@@ -1,0 +1,17 @@
+nthreads=40
+
+export SINGULARITYENV_TEMPLATEFLOW_HOME=/share/home/kkwang/.cache/templateflow
+singularity run --cleanenv -B /derivatives(生成过程文件的地址)/:/wd \
+-B /输入数据路径:/inputbids \
+-B /输出数据路径:/output \
+-B /license文件路径/code:/freesurfer_license \
+/usr/nzx-cluster/apps/fmriprep/singularity/fmriprep-20.2.1.simg  /inputbids /output participant\
+-w /wd \
+--nthreads $nthreads \
+--omp-nthreads $nthreads \
+--mem-mb 160000 \
+--fs-license-file /freesurfer_license/license.txt \
+--output-spaces T1w MNI152NLin6Asym MNI152NLin2009cAsym  \
+--return-all-components \
+--notrack --verbose \
+--skip-bids-validation --debug all --stop-on-first-crash --use-syn-sdc --resource-monitor 
