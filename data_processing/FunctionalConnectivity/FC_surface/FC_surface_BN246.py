@@ -44,25 +44,55 @@ def plot_correlation_matrix(correlation_matrix,labels):
         reorder=True,
     )
     plotting.show()
+def subc_timeseries(data,atlaspath):
 
-def calculate_FC(dpath,tpath,regions):
+    atlasData = nib.load(atlaspath).get_fdata()
+
+    atlasData = np.reshape(atlasData, (1, 91 * 109 * 91), order='F')
+
+    data = np.reshape(data, (data.shape[3], 91 * 109 * 91), order='F')
+
+    roilist = []
+    for r in range(211, 247):
+        index = np.where(atlasData == r)
+        roi = data[:, index[1]]  # 将第r个脑区中的voxel 数据（时间序列）提取
+
+        totalvoxel = roi.shape[1]  # 统计体素个数
+
+        sum = np.sum(roi, axis=1)
+
+        roiBoldsum = sum / totalvoxel
+
+        roilist.append(roiBoldsum)
+
+    subctimeseries = np.array(roilist)
+    print('subctimeseries.shape-', subctimeseries.shape)
+    subcFC = np.corrcoef(subctimeseries)
+    return subcFC,subctimeseries
+
+
+
+
+def calculate_FC(dpath,tpath,atlaspath,regions):
     #datapath = '/Users/qingchen/Documents/code/Data/FC/sub-06202_task-rest_space-fsLR_den-91k_desc-denoisedSmoothed_bold.dtseries.nii'
     datapath = dpath
     cifti, cifti_data, cifti_hdr, axes = loadData(datapath)
     axes = [cifti_hdr.get_axis(i) for i in range(cifti.ndim)]
-    #Subcortical_Data = volume_from_cifti(cifti_data, axes[1])
+
+    Subcortical_Data = volume_from_cifti(cifti_data, axes[1])
+    Subcortical_Data =  Subcortical_Data.get_fdata()
+    subcFC , subctimeseries = subc_timeseries(Subcortical_Data,atlaspath)
+    savemat('./subcFC.mat', {'data': subcFC})
     a_left = surf_data_from_cifti(cifti_data, axes[1], 'CIFTI_STRUCTURE_CORTEX_LEFT')
     a_right = surf_data_from_cifti(cifti_data, axes[1], 'CIFTI_STRUCTURE_CORTEX_RIGHT')
     cortex_data = np.concatenate((a_left, a_right), axis=0)
-    print('cortex_data',cortex_data.shape)
+    #print('cortex_data',cortex_data.shape)
     template = tpath
     label = nib.load(template).get_fdata()
     label[label > 210] -= 210
 
     if label.shape[1] == 59412:
         cortex_data = nib.load(datapath).get_fdata()[:, 0:59412].T
-
-
     roilist = []
     for i in range(1,regions + 1):
         index = np.where(label == i)
@@ -70,20 +100,21 @@ def calculate_FC(dpath,tpath,regions):
         roilist.append(np.mean(roi, axis=0))
 
     roiMatrix = np.array(roilist)
-    resFC = np.corrcoef(roiMatrix)
+    vertexsubc = np.vstack((roiMatrix, subctimeseries))
+    resFC = np.corrcoef(vertexsubc)
     print('FC shape : ',resFC.shape)
     return resFC
 
 
 datapath = '/Volumes/QCI/NormativeModel/Data135/HC/dtseriesnii/*ap*'
 tpath = '/Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_freesurfer/fsaverage/fsaverage_LR32k/fsaverage.BN_Atlas.32k_fs_LR.dlabel.nii'
-
+atlaspath = '/Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_246_2mm.nii.gz'
 data = glob.glob(datapath)
 
 for i in data:
     subID = i.split('/')[-1][0:9]
     print(subID)
-    resFC = calculate_FC(i,tpath,210)
+    resFC = calculate_FC(i,tpath,atlaspath,210)
     outpath = '/Volumes/QCI/NormativeModel/Data135/HC/BN246_FC/' + subID +'_FC.mat'
     savemat(outpath,{'data':resFC})
     exit()

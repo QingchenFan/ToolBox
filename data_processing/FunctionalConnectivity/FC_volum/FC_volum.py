@@ -16,8 +16,6 @@ from nilearn.image import resample_to_img
 template = './Schaefer2018_400Parcels_7Networks_order_FSLMNI152_2mm.nii.gz'
 shcaData = nib.load(template)
 templateData = shcaData.get_fdata()
-
-
 templateData = np.reshape(templateData, (1, 91 * 109 * 91), order='F')
 
 
@@ -31,7 +29,6 @@ print(bolddata)
 roilist = []
 for r in range(1, 401):
     index = np.where(templateData == r)
-
 
     roi = bolddata[:, index[1]]  # 将第r个脑区中的voxel 数据（时间序列）提取
 

@@ -45,7 +45,7 @@ def plot_correlation_matrix(correlation_matrix,labels):
 
 schaefer_400 = datasets.fetch_atlas_schaefer_2018(n_rois=400, resolution_mm=2)  # 加载 schaefer template (可设置参数选择合适的模板)，可以选择nilearn自带template，也可以自己加载所需要的template
 atlas_filename = schaefer_400.maps                                              # atlas_filename  模板数据的路径 string
-labelsname = schaefer_400.labels                                                    # labels 模板的标签 list
+labelsname = schaefer_400.labels                                                # labels 模板的标签 list
 
 bolddata = '/Users/qingchen/Documents/code/Data/roi_fc/sub-0062_task-rest_space-MNI152NLin6Asym_res-2_desc-denoisedSmoothed_bold.nii.gz'
 
