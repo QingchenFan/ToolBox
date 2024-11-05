@@ -45,32 +45,20 @@ def find_martrix_max_value(data_matrix):
 # find_martrix_min_value(z_res)
 # find_martrix_max_value(z_res)
 
-matdata = sio.loadmat('/Users/qingchen/Documents/code/Data/FC/FC.mat')
-#matdata = sio.loadmat('./Schaefer400_7FC_new.mat')
+matdata = sio.loadmat('/Volumes/QCI/NormativeModel/Data135/HC/BN246_FC/sub-HC001_FC.mat')
 data = matdata['data']
-
-# datapath = '/Users/qingchen/Documents/code/Data/FC/sub-06202_task-rest_space-fsLR_atlas-Schaefer417_den-91k_measure-pearsoncorrelation_conmat.pconn.nii'
-# data = nib.load(datapath).get_fdata()
 
 find_martrix_max_value(data)
 
 # Compute the correlation matrix
-
-
 mask = np.triu(np.ones_like(data, dtype=bool))
-
-
 resdata = pd.DataFrame(data)
-
-
 cx = sns.heatmap(data,
                  xticklabels=False, yticklabels=False, cmap='Blues', annot=False,
                  #mask=mask
                 #cbar_kws ={'format': '%.1f','ticks': [-1.0, 0.0, 1.0]}
                 )    # xticklabels/yticklabels x轴的titel  "Spectral"
 cx.tick_params(labelsize=100, left=False, bottom=False)  # 控制去掉小刻度线
-
-
 cbar_3 = cx.collections[0].colorbar
 cbar_3.ax.tick_params(labelsize=12, left=False, right=False)
 

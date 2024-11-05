@@ -57,6 +57,11 @@ def calculate_FC(dpath,tpath,regions):
     print('cortex_data',cortex_data.shape)
     template = tpath
     label = nib.load(template).get_fdata()
+    label[label > 210] -= 210
+
+    if label.shape[1] == 59412:
+        cortex_data = nib.load(datapath).get_fdata()[:, 0:59412].T
+
 
     roilist = []
     for i in range(1,regions + 1):
@@ -70,20 +75,15 @@ def calculate_FC(dpath,tpath,regions):
     return resFC
 
 
-# --- Test---
-# datapath = '/Users/qingchen/Documents/code/Data/FC/sub-06202_task-rest_space-fsLR_den-91k_desc-denoisedSmoothed_bold.dtseries.nii'
-# template = '/Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_freesurfer/fsaverage/fsaverage_LR32k/fsaverage.BN_Atlas.32k_fs_LR.dlabel.nii'
-# resFC = calculate_FC(datapath,template,400)
-#-------------
+datapath = '/Volumes/QCI/NormativeModel/Data135/HC/dtseriesnii/*ap*'
+tpath = '/Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_freesurfer/fsaverage/fsaverage_LR32k/fsaverage.BN_Atlas.32k_fs_LR.dlabel.nii'
 
+data = glob.glob(datapath)
 
-
-#savemat('./FC.mat',{'data':resFC})
-#savemat('./FC.mat',{'data':resFC})
-# 画图
-# from nilearn import datasets
-# schaefer_400 = datasets.fetch_atlas_schaefer_2018(n_rois=400, resolution_mm=2)  # 加载 schaefer template (可设置参数选择合适的模板)，可以选择nilearn自带template，也可以自己加载所需要的template
-# atlas_filename = schaefer_400.maps                                              # atlas_filename  模板数据的路径 string
-# labels = schaefer_400.labels
-#
-# plot_correlation_matrix(resFC,labels)
+for i in data:
+    subID = i.split('/')[-1][0:9]
+    print(subID)
+    resFC = calculate_FC(i,tpath,210)
+    outpath = '/Volumes/QCI/NormativeModel/Data135/HC/BN246_FC/' + subID +'_FC.mat'
+    savemat(outpath,{'data':resFC})
+    exit()
