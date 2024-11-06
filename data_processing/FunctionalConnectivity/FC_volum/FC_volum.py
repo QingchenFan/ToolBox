@@ -23,6 +23,7 @@ boldpath = './sub-MDD001_task-rest_space-MNI152NLin6Asym_res-2_desc-denoisedSmoo
 bolddata = nib.load(boldpath).get_fdata()
 savemat('./bolddata.mat', {'data': bolddata})
 print(bolddata.shape)
+bolddata = bolddata.transpose(3, 0, 1, 2)  # 这一步待验证，这一步很关键！！！！
 bolddata = np.reshape(bolddata, (158, 91 * 109 * 91), order='F')
 print(bolddata)
 

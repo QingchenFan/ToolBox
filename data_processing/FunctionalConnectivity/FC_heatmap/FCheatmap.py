@@ -46,7 +46,7 @@ def find_martrix_max_value(data_matrix):
 # find_martrix_max_value(z_res)
 
 matdata = sio.loadmat('/Volumes/QCI/NormativeModel/Data135/HC/BN246_FC/sub-HC001_FC.mat')
-matdata = sio.loadmat('/Users/qingchen/Documents/code/ToolBox/data_processing/FunctionalConnectivity/FC_surface/subcFC.mat')
+#matdata = sio.loadmat('/Users/qingchen/Documents/code/ToolBox/data_processing/FunctionalConnectivity/FC_surface/subcFC2.mat')
 data = matdata['data']
 
 find_martrix_max_value(data)

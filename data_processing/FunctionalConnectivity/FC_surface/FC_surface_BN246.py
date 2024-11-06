@@ -45,19 +45,22 @@ def plot_correlation_matrix(correlation_matrix,labels):
     )
     plotting.show()
 def subc_timeseries(data,atlaspath):
-
+    data = data.transpose(3, 0, 1, 2)
     atlasData = nib.load(atlaspath).get_fdata()
 
     atlasData = np.reshape(atlasData, (1, 91 * 109 * 91), order='F')
 
-    data = np.reshape(data, (data.shape[3], 91 * 109 * 91), order='F')
+    data = np.reshape(data, (data.shape[0], 91 * 109 * 91), order='F')
 
     roilist = []
     for r in range(211, 247):
+        print('--r--',r)
         index = np.where(atlasData == r)
+        print('--index--',index)
         roi = data[:, index[1]]  # 将第r个脑区中的voxel 数据（时间序列）提取
-
-        totalvoxel = roi.shape[1]  # 统计体素个数
+        print('-roi-',roi.shape)
+        # 统计体素个数
+        totalvoxel = roi.shape[1] if roi.shape[1] > 0 else 1
 
         sum = np.sum(roi, axis=1)
 
@@ -81,8 +84,11 @@ def calculate_FC(dpath,tpath,atlaspath,regions):
 
     Subcortical_Data = volume_from_cifti(cifti_data, axes[1])
     Subcortical_Data =  Subcortical_Data.get_fdata()
+
     subcFC , subctimeseries = subc_timeseries(Subcortical_Data,atlaspath)
-    savemat('./subcFC.mat', {'data': subcFC})
+    # savemat('./subcFC.mat', {'data': subcFC})
+    # savemat('./subctimeseries.mat', {'data': subctimeseries})
+
     a_left = surf_data_from_cifti(cifti_data, axes[1], 'CIFTI_STRUCTURE_CORTEX_LEFT')
     a_right = surf_data_from_cifti(cifti_data, axes[1], 'CIFTI_STRUCTURE_CORTEX_RIGHT')
     cortex_data = np.concatenate((a_left, a_right), axis=0)
