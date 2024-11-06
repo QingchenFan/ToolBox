@@ -59,16 +59,60 @@ from nilearn import plotting
 # subcFC , subctimeseries = subc_timeseries(data,atlaspath)
 # savemat('./subcFC2.mat', {'data2': subcFC})
 # savemat('./subctimeseries2.mat', {'data2': subctimeseries})
-np.random.seed(0)
+np.random.seed(1)
 a = np.random.randint(0,10,size=(3, 2, 4))
 b = np.random.randint(0,10,size=(3, 2, 4, 2))
 c = b.transpose(3, 0, 1, 2)
-print(a)
-print(b)
-print(c)
-aa = np.reshape(a,(1, 3 * 2 * 4), order='F')
-bb = np.reshape(b,(2, 3 * 2 * 4), order='F')
-cc = np.reshape(c,(2, 3 * 2 * 4), order='F')
-print(aa)
-print(bb)
-print(cc)
+
+# print(a)
+# print(b)
+# print(c)
+# aa = np.reshape(a,(1, 3 * 2 * 4), order='F')
+# bb = np.reshape(b,(1, 3 * 2 * 4), order='F')
+# cc = np.reshape(c,(1, 3 * 2 * 4), order='F')
+# print('aa-\n',aa)
+# print('bb-\n',bb)
+# print('cc-\n',cc)
+
+data = [
+    [[[9, 9],
+      [7, 6],
+      [9, 1],
+      [0, 1]],
+
+     [[8, 8],
+      [3, 9],
+      [8, 7],
+      [3, 6]]],
+
+    [[[5, 1],
+      [9, 3],
+      [4, 8],
+      [1, 4]],
+
+     [[0, 3],
+      [9, 2],
+      [0, 4],
+      [9, 2]]],
+
+    [[[7, 7],
+      [9, 8],
+      [6, 9],
+      [3, 7]],
+
+     [[7, 4],
+      [5, 9],
+      [3, 6],
+      [8, 0]]]
+]
+d = np.array(data)
+
+
+e = d.transpose(3, 0, 1, 2)
+print(e.shape)
+f = e[0:2,:,:,:]
+print(f)
+print(f.shape)
+g = f.transpose(1,2,3,0)
+print(g.shape)
+print(g)

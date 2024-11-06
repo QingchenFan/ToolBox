@@ -56,9 +56,9 @@ def subc_timeseries(data,atlaspath):
     for r in range(211, 247):
         print('--r--',r)
         index = np.where(atlasData == r)
-        print('--index--',index)
+
         roi = data[:, index[1]]  # 将第r个脑区中的voxel 数据（时间序列）提取
-        print('-roi-',roi.shape)
+
         # 统计体素个数
         totalvoxel = roi.shape[1] if roi.shape[1] > 0 else 1
 
@@ -85,7 +85,7 @@ def calculate_FC(dpath,tpath,atlaspath,regions):
     Subcortical_Data = volume_from_cifti(cifti_data, axes[1])
     Subcortical_Data =  Subcortical_Data.get_fdata()
 
-    subcFC , subctimeseries = subc_timeseries(Subcortical_Data,atlaspath)
+    _ , subctimeseries = subc_timeseries(Subcortical_Data,atlaspath)
     # savemat('./subcFC.mat', {'data': subcFC})
     # savemat('./subctimeseries.mat', {'data': subctimeseries})
 
@@ -123,4 +123,3 @@ for i in data:
     resFC = calculate_FC(i,tpath,atlaspath,210)
     outpath = '/Volumes/QCI/NormativeModel/Data135/HC/BN246_FC/' + subID +'_FC.mat'
     savemat(outpath,{'data':resFC})
-    exit()
