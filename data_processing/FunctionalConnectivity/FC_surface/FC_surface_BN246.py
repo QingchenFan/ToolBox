@@ -54,7 +54,7 @@ def subc_timeseries(data,atlaspath):
 
     roilist = []
     for r in range(211, 247):
-        print('--r--',r)
+
         index = np.where(atlasData == r)
 
         roi = data[:, index[1]]  # 将第r个脑区中的voxel 数据（时间序列）提取
@@ -112,14 +112,15 @@ def calculate_FC(dpath,tpath,atlaspath,regions):
     return resFC
 
 
-datapath = '/Volumes/QCI/NormativeModel/Data135/HC/dtseriesnii/*ap*'
+datapath = '/Volumes/QCI/NormativeModel/DuiLie/MDD/dtseriesnii/*ap*'
 tpath = '/Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_freesurfer/fsaverage/fsaverage_LR32k/fsaverage.BN_Atlas.32k_fs_LR.dlabel.nii'
 atlaspath = '/Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_246_2mm.nii.gz'
 data = glob.glob(datapath)
 
 for i in data:
-    subID = i.split('/')[-1][0:9]
+    subID = i.split('/')[-1][0:13]
     print(subID)
     resFC = calculate_FC(i,tpath,atlaspath,210)
-    outpath = '/Volumes/QCI/NormativeModel/Data135/HC/BN246_FC/' + subID +'_FC.mat'
+    outpath = '/Volumes/QCI/NormativeModel/DuiLie/MDD/BN246_FC/' + subID +'_FC.mat'
     savemat(outpath,{'data':resFC})
+    exit()

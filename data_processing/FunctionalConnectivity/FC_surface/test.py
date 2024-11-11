@@ -110,7 +110,7 @@ d = np.array(data)
 
 e = d.transpose(3, 0, 1, 2)
 print(e.shape)
-f = e[0:2,:,:,:]
+f = e[0:1,:,:,:]
 print(f)
 print(f.shape)
 g = f.transpose(1,2,3,0)
