@@ -4,7 +4,7 @@ import nibabel as nib
 import pandas as pd
 from nibabel import cifti2
 import scipy.io as sio
-path = "/Volumes/QCI/NormativeModel/Data135/HC/INT/Group/*"
+path = "/Volumes/QC/NormativeModel/Data135/HC/INT/Group/*"
 databox = glob.glob(path)
 
 box = np.empty((1, 91282))
@@ -23,7 +23,7 @@ for i,j in enumerate(databox):
         box[:, 90000:] = data
 
 new_data = box
-
+sio.savemat("lGroup.mat",{'l':new_data})
 l_box = np.zeros((1, 32492))
 
 ind_l = np.loadtxt('/Users/qingchen/Documents/Data/template/metric_index_L.txt').reshape(1,-1)
@@ -34,6 +34,7 @@ r_box = np.zeros((1, 32492))
 ind_r = np.loadtxt('/Users/qingchen/Documents/Data/template/metric_index_R.txt').reshape(1,-1)
 R_brain = new_data[:, 29696:59412]
 r_box[:, ind_r.astype(int)] = R_brain
+
 resdata = np.concatenate((l_box,r_box), axis=1)
 #print(new_data)
 print(resdata.shape)
@@ -41,12 +42,13 @@ print(resdata.shape)
 # ----------------------------------------------------------------
 atlas = nib.load("/Users/qingchen/Documents/code/Data/FC/Schaefer2018_400Parcels_17Networks_order.dscalar.nii")
 adata = atlas.get_fdata()
-print(adata.shape)
+
+sio.savemat("schaefer400.mat",{'s':adata})
 scalar_axis=nib.cifti2.cifti2_axes.ScalarAxis(['val'])
 brain_model_axis=atlas.header.get_axis(1)
 
 val_head=nib.cifti2.Cifti2Header.from_axes((scalar_axis, brain_model_axis))
-nib.Cifti2Image(resdata, val_head, atlas.nifti_header, atlas.extra, atlas.file_map).to_filename('./INT.dscalar.nii')
+nib.Cifti2Image(resdata, val_head, atlas.nifti_header, atlas.extra, atlas.file_map).to_filename('./INT_Data135.dscalar.nii')
 
 
 # ------------Tool  --------------------------------

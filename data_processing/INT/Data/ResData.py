@@ -1,6 +1,6 @@
 import scipy.io as sio
 import numpy as np
-path = '/Volumes/QCI/NormativeModel/Data135/HC/INT/Group/Group_0.mat'
+path = '/Volumes/QC/NormativeModel/Data135/HC/INT/INT_BN246/INT_group/Group.mat'
 
 a = sio.loadmat(path)
 
