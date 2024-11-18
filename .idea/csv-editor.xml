@@ -3,7 +3,133 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="/data_processing/DataProcess/ABCD_Diagnose/ABCD_CBCL_Label_z.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/DataProcess/ABCD_Diagnose/ABCD_Diagnose_Distribution/res_h.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/DataProcess/ABCD_Diagnose/abcd_cbcl_baseline.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/DataProcess/ABCD_Diagnose/abcd_cbcl_label.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/DataProcess/CovariateLabel/ABCD_Label.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/DataProcess/CovariateLabel/HCPLable.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/data_processing/DataProcess/Findadge/roi_name(1).csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/DataProcess/Label_processing_Factors_Age/ABCD_CBCL_FQC.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/DataProcess/Label_processing_Factors_Age/ABCD_Label.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/DataProcess/Label_processing_Factors_Age/abcd_cbcl_baseline_label.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/DataProcess/Label_processing_Factors_Age/abcd_cbcl_baseline_label_final.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/DataProcess/Label_processing_Factors_Age/factor_score_wx.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/DataProcess/NanProblem/ABCD_Label.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/DataProcess/NanProblem/HCPLable.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/DataProcess/Process_label/abcd_cbcl_baseline_label.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/INT/Data/group.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/Plotting/MakeGraph/Histogram/ABCD_Label.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/Plotting/MakeGraph/Histogram/abcd_cbcl_label.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data_processing/Plotting/MakeGraph/abcd_cbcl_baseline_label.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
