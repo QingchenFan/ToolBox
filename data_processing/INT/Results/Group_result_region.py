@@ -14,7 +14,7 @@ template = nib.load(template)
 label=template.get_fdata()
 label[label > 210] -= 210
 
-data = sio.loadmat("/Volumes/QC/NormativeModel/Data135/MDD/INT/INT_BN246/INT_group/Group.mat")['hwhm']
+data = sio.loadmat("/Volumes/QC/INT/INT_BN246_HC135BP_allMDD/INT_MDDgroup/Group.mat")['hwhm']
 
 
 for i in range(1, data.shape[1]+1):
@@ -27,4 +27,4 @@ scalar_axis = nib.cifti2.cifti2_axes.ScalarAxis(['meanZvalue'])
 brain_model_axis = template.header.get_axis(1)
 scalar_header = nib.cifti2.Cifti2Header.from_axes((scalar_axis, brain_model_axis))
 scalar_img = nib.Cifti2Image(label, header=scalar_header)
-scalar_img.to_filename('./testmdd.dscalar.nii')
+scalar_img.to_filename('./INT_allDataMDD.dscalar.nii')

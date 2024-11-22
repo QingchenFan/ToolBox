@@ -109,17 +109,18 @@ def calculate_FC(dpath,tpath,atlaspath,regions):
     print('FC shape : ',resFC.shape)
     return resFC,vertexsubc
 
-datapath = '/Volumes/QC/NormativeModel/Data135/MDD/dtseriesnii/*ap*'
+datapath = '/Volumes/QCI/NormativeModel/BrainProject/MDDdtseriesnii/*/*ap*'
 tpath = '/Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_freesurfer/fsaverage/fsaverage_LR32k/fsaverage.BN_Atlas.32k_fs_LR.dlabel.nii'
 atlaspath = '/Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_246_2mm.nii.gz'
 data = glob.glob(datapath)
 
 for i in data:
-    subID = i.split('/')[-1][0:10]
+    subID = i.split('/')[-1][0:13]
+    subID = i.split('/')[-2]
     print(subID)
     resFC, vertexsubc = calculate_FC(i,tpath,atlaspath,210)
     vertexsubc = vertexsubc.T
-    newpath = "/Volumes/QC/NormativeModel/Data135/MDD/Data135_246timeseries/" + subID
+    newpath = "/Volumes/QCI/NormativeModel/BrainProject/BPMDD_246timeseries/" + subID
     if not os.path.exists(newpath):
         os.makedirs(newpath)
     newdatap = newpath + '/' + subID  + '.txt'
