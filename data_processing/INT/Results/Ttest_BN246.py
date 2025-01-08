@@ -4,8 +4,8 @@ import nibabel as nib
 
 import scipy.io as sio
 from scipy.stats import ttest_ind
-HCData = sio.loadmat('/Volumes/QC/INT/INT_BN246_HC135_allMDD/INT_HCind/sub-HC114_Ind.mat')['hwhms']
-MDDData = sio.loadmat('/Volumes/QC/INT/INT_BN246_HC135BP_allMDD/INT_MDDind/sub-MDD143V01_Ind.mat')['hwhms']
+HCData = sio.loadmat('/Volumes/Images_QC/INT/INT_BN246_HC135_allMDD/INT_HCind/sub-HC114_Ind.mat')['hwhms']
+MDDData = sio.loadmat('/Volumes/Images_QC/INT/INT_BN246_HC135BP_allMDD/INT_MDDind/sub-MDD143V01_Ind.mat')['hwhms']
 box = []
 roi = {}
 for i in range(0,246):

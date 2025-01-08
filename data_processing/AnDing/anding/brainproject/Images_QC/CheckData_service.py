@@ -7,7 +7,7 @@ import csv
 def adb_shell(cmd):
     result = subprocess.getstatusoutput(cmd)
     return result
-path = '/home/zhouyuan/fan/QC/*/*.nii.gz'
+path = '/home/zhouyuan/fan/Images_QC/*/*.nii.gz'
 NiiData = glob.glob(path)
 for i in NiiData:
     subID = i.split('/')[-2]
@@ -50,7 +50,7 @@ for i in NiiData:
     #   读取json文件
 
     # JSON 文件路径
-    json_file_path = "/home/zhouyuan/fan/QC"+subID+"/"+filename+".json"
+    json_file_path = "/home/zhouyuan/fan/Images_QC"+subID+"/"+filename+".json"
 
     # 之前生成的 CSV 文件路径
     csv_file_path = csv_filename

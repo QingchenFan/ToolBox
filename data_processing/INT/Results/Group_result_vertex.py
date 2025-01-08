@@ -4,7 +4,7 @@ import nibabel as nib
 import pandas as pd
 from nibabel import cifti2
 import scipy.io as sio
-path = "/Volumes/QC/NormativeModel/Data135/HC/INT/Group/*"
+path = "/Volumes/Images_QC/NormativeModel/Data135/HC/INT/Group/*"
 databox = glob.glob(path)
 
 box = np.empty((1, 91282))

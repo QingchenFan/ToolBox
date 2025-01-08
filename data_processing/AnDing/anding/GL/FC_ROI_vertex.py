@@ -26,7 +26,7 @@ def surf_data_from_cifti(data, axis, surf_name):
     raise ValueError(f"No structure named {surf_name}")
 
 
-p = '/Volumes/QC/Dataprocess/hcout_xcpd/xcp_d/sub-*'
+p = '/Volumes/Images_QC/Dataprocess/hcout_xcpd/xcp_d/sub-*'
 masker = '/Users/qingchen/Documents/code/Data/roi_fc/amygdala_mask_2/ROI_Amygdala_SF_R_MNI.nii.gz'
 #mask = '/Users/qingchen/Documents/code/Data/roi_fc/amygdala_mask/amygdala_l.nii'
 box = glob.glob(p)
@@ -71,8 +71,8 @@ for i in box :
         res.append(corr[0,1])
 
     data_corr = np.array(res)
-    savemat('/Volumes/QC/HC_Amygdala_SF_R_FC/'+subId+'_AMGYDALA_SF_R_FC.mat', {'data': data_corr})
-    #savemat('/Volumes/QC/HC_Amygdala_L_FC/'+subId+'_AMGYDALA_L_FC.mat', {'data': data_corr})
+    savemat('/Volumes/Images_QC/HC_Amygdala_SF_R_FC/'+subId+'_AMGYDALA_SF_R_FC.mat', {'data': data_corr})
+    #savemat('/Volumes/Images_QC/HC_Amygdala_L_FC/'+subId+'_AMGYDALA_L_FC.mat', {'data': data_corr})
     exit()
 
 

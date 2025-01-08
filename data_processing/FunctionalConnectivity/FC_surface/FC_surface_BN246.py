@@ -31,7 +31,7 @@ def loadData(datapath):
     cifti_data = cifti.get_fdata()
     cifti_hdr = cifti.header
     axes = [cifti_hdr.get_axis(i) for i in range(cifti.ndim)]
-    return cifti,cifti_data, cifti_hdr, axes
+    return cifti, cifti_data, cifti_hdr, axes
 
 def plot_correlation_matrix(correlation_matrix,labels):
     plotting.plot_matrix(
@@ -71,7 +71,7 @@ def subc_timeseries(data,atlaspath):
     subctimeseries = np.array(roilist)
     print('subctimeseries.shape-', subctimeseries.shape)
     subcFC = np.corrcoef(subctimeseries)
-    return subcFC,subctimeseries
+    return subcFC, subctimeseries
 
 
 
@@ -83,9 +83,9 @@ def calculate_FC(dpath,tpath,atlaspath,regions):
     axes = [cifti_hdr.get_axis(i) for i in range(cifti.ndim)]
 
     Subcortical_Data = volume_from_cifti(cifti_data, axes[1])
-    Subcortical_Data =  Subcortical_Data.get_fdata()
+    Subcortical_Data = Subcortical_Data.get_fdata()
 
-    _ , subctimeseries = subc_timeseries(Subcortical_Data,atlaspath)
+    _, subctimeseries = subc_timeseries(Subcortical_Data, atlaspath)
     # savemat('./subcFC.mat', {'data': subcFC})
     # savemat('./subctimeseries.mat', {'data': subctimeseries})
 
@@ -100,15 +100,15 @@ def calculate_FC(dpath,tpath,atlaspath,regions):
     if label.shape[1] == 59412:
         cortex_data = nib.load(datapath).get_fdata()[:, 0:59412].T
     roilist = []
-    for i in range(1,regions + 1):
+    for i in range(1, regions + 1):
         index = np.where(label == i)
-        roi = cortex_data[index[1],: ]
+        roi = cortex_data[index[1], :]
         roilist.append(np.mean(roi, axis=0))
 
     roiMatrix = np.array(roilist)
     vertexsubc = np.vstack((roiMatrix, subctimeseries))
     resFC = np.corrcoef(vertexsubc)
-    print('FC shape : ',resFC.shape)
+    print('FC shape : ', resFC.shape)
     return resFC
 
 
@@ -120,7 +120,7 @@ data = glob.glob(datapath)
 for i in data:
     subID = i.split('/')[-1][0:13]
     print(subID)
-    resFC = calculate_FC(i,tpath,atlaspath,210)
+    resFC = calculate_FC(i, tpath, atlaspath, 210)
     outpath = '/Volumes/QCI/NormativeModel/DuiLie/MDD/BN246_FC/' + subID +'_FC.mat'
-    savemat(outpath,{'data':resFC})
+    savemat(outpath, {'data': resFC})
     exit()

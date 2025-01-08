@@ -13,7 +13,7 @@ brainmask = '/Users/qingchen/Documents/code/Data/FC/GMmask.nii.gz'
 image = '/Volumes/QCII/Data135_processed/data135_HC_fmriprep_out/sub-HC001/func/sub-HC001_task-rest_acq-ap_run-1_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz'
 confounds_minimal_no_gsr, sample_mask = load_confounds(
     image,
-    strategy=[ "motion", "wm_csf", "global_signal"],
+    strategy=["motion", "wm_csf", "global_signal"],
     motion="basic",
     wm_csf="basic",
     global_signal="basic",
@@ -23,9 +23,9 @@ seed_masker = NiftiMasker(
     mask_img=seedmask,
     standardize="zscore_sample",
     standardize_confounds="zscore_sample",
-    smoothing_fwhm = 6,
-    low_pass = 0.1,
-    high_pass = 0.01,
+    smoothing_fwhm=6,
+    low_pass=0.1,
+    high_pass=0.01,
     t_r=2,
     memory_level=1,
     verbose=0,
@@ -36,14 +36,14 @@ brain_masker = NiftiMasker(
     mask_img=brainmask,
     standardize="zscore_sample",
     standardize_confounds="zscore_sample",
-    smoothing_fwhm = 6,
-    low_pass = 0.1,
-    high_pass = 0.01,
+    smoothing_fwhm=6,
+    low_pass=0.1,
+    high_pass=0.01,
     t_r=2,
     memory_level=1,
     verbose=0,
 )
-brain_time_series = brain_masker.fit_transform(image,confounds=confounds_minimal_no_gsr, sample_mask=sample_mask)
+brain_time_series = brain_masker.fit_transform(image, confounds=confounds_minimal_no_gsr, sample_mask=sample_mask)
 
 print(f"Seed time series shape: ({seed_time_series.shape})")
 print(f"Brain time series shape: ({brain_time_series.shape})")

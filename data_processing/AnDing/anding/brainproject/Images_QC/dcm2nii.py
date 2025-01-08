@@ -9,7 +9,7 @@ data = glob.glob(path)
 for i in tqdm(data):
 
     subId = i.split('/')[-2]
-    outpath = '/home/zhouyuan/fan/QC/'+ subId
+    outpath = '/home/zhouyuan/fan/Images_QC/'+ subId
     print('outpath-', outpath)
     if not os.path.exists(outpath):
         os.makedirs(outpath)

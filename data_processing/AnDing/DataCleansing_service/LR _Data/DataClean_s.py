@@ -3,7 +3,7 @@ import os.path
 from shutil import copy
 
 path = glob.glob('/home/zhouyuan/Documents/Datafc/20231014150026/nifti/V1/*')
-path = glob.glob('/Volumes/QC/data_135/*')
+path = glob.glob('/Volumes/Images_QC/data_135/*')
 for i in path:
     print('i--',i)
     if 'HC' in i :
@@ -56,7 +56,7 @@ for i in path:
         T1wJSONpath = glob.glob(i + '/*t1*.json')
 
         newpath = '/home/zhouyuan/Documents/Datafc/BrainProject_bids/'+'sub-'+subid
-        newpath = '/Volumes/QC/data135_bids/'+'sub-'+subid
+        newpath = '/Volumes/Images_QC/data135_bids/'+'sub-'+subid
         if not os.path.exists(newpath):
             os.mkdir(newpath)
 

@@ -2,7 +2,7 @@ import os
 import glob
 from shutil import copy
 
-path = '/Volumes/qingchen/QC/Datafc/HC/'
+path = '/Volumes/qingchen/Images_QC/Datafc/HC/'
 
 file = os.listdir(path)
 

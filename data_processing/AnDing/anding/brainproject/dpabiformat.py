@@ -2,7 +2,7 @@ import glob
 import os
 
 from shutil import copy
-path = '/Volumes/qingchen/QC/BIDS/BDHCMDD/*'
+path = '/Volumes/qingchen/Images_QC/BIDS/BDHCMDD/*'
 sub = glob.glob(path)
 
 for i in sub:

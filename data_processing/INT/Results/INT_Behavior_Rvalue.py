@@ -3,7 +3,7 @@ import numpy as np
 from scipy.stats import pearsonr
 from scipy.stats import spearmanr
 import statsmodels.stats.multitest as smm
-data = pd.read_csv("/Volumes/QC/INT/INT_BN246_HC135BP_allMDD/Results/allDataMDD_HAMD_final.csv")
+data = pd.read_csv("/Volumes/Images_QC/INT/INT_BN246_HC135BP_allMDD/Results/allDataMDD_HAMD_final.csv")
 
 hamd = np.array(data['HAMD17'])
 

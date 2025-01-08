@@ -14,7 +14,7 @@ template = nib.load(template)
 label=template.get_fdata()
 label[label > 210] -= 210
 
-data = sio.loadmat("/Volumes/QC/INT/INT_BN246_HC135BP_allMDD/INT_MDDgroup/Group.mat")['hwhm']
+data = sio.loadmat("/Volumes/Images_QC/INT/INT_BN246_HC135BP_allMDD/INT_MDDgroup/Group.mat")['hwhm']
 
 
 for i in range(1, data.shape[1]+1):

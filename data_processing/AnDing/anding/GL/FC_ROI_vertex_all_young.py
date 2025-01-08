@@ -102,7 +102,7 @@ for i in box:
     exit()
     # TODO:
     #savemat('/Volumes/QCI/GL/FC_amygdala_vertex_young/MDD_Amygdala_'+mark+'_FC/' + subId + '_AMGYDALA_'+mark+'_FC.mat', {'data': data_corr})
-    # savemat('/Volumes/QC/HC_Amygdala_L_FC/'+subId+'_AMGYDALA_L_FC.mat', {'data': data_corr})
+    # savemat('/Volumes/Images_QC/HC_Amygdala_L_FC/'+subId+'_AMGYDALA_L_FC.mat', {'data': data_corr})
 
     dic = {}
     for j in range(1, 401):

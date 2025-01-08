@@ -1,6 +1,6 @@
 import glob
 import pandas as pd
-path = '/Volumes/qingchen/QC/confounds/MDD/*.tsv'
+path = '/Volumes/qingchen/Images_QC/confounds/MDD/*.tsv'
 fl = glob.glob(path)
 for i in fl:
     id = i[i.index('sub-'):i.index('sub-')+15]
