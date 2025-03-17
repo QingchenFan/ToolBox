@@ -39,7 +39,7 @@ def registration(fix_path,move_path,save_path,label_path =None,save_label_path =
 fix_path = 'MNI152_T1_1mm.nii.gz'
 move_path = './MDD002/MDD002_t1_mprage_sag_p2_iso_20210520203739_3_Crop_1.nii'
 save_path = 'reg_2min.nii.gz'
-registration(fix_path,move_path,save_path)
+registration(fix_path, move_path, save_path)
 
 
 
