@@ -1,7 +1,7 @@
 import pandas as pd
 
-HCData = pd.read_csv('/Volumes/Images_QC/INT/INT_BN246_HC135BP_allMDD/Results/INTvalue_HC.csv')
-MDDData = pd.read_csv('/Volumes/Images_QC/INT/INT_BN246_HC135BP_allMDD/Results/INTvalue_MDD.csv')
+MDDData= pd.read_csv('/Volumes/QC/INT/INT_BN246_HC135BP_BP135MDD/Results/INTvalue_HC.csv')
+#MDDData = pd.read_csv('/Volumes/QC/INT/INT_BN246_HC135BP_BP135MDD/Results/INTvalue_MDD.csv')
 # 检查空值
 nan_rows = MDDData.isnull().any(axis=1)
 print(nan_rows)

@@ -22,7 +22,7 @@ for i in filename:
     print(data)
 
     m = scio.loadmat(data[0])
-    gp = GradientMaps(kernel='normalized_angle',approach='pca', alignment='procrustes', n_components=10, random_state=0)
+    gp = GradientMaps(kernel='normalized_angle', approach='pca', alignment='procrustes', n_components=10, random_state=0)
     gp.fit(m['data'])
     res = gp.gradients_
     newpath = '/Volumes/qingchen/anding/gradient/hc_v2/gradients_aligned_global/'+i

@@ -13,7 +13,7 @@ from nilearn import plotting
 def correlation_matrix(atlas_filename,labels,bolddata):
     masker = NiftiLabelsMasker(
         labels_img=atlas_filename,
-        labels = labels,
+        labels=labels,
         #standardize="zscore_sample",
         #standardize_confounds="zscore_sample",
         memory="nilearn_cache",
@@ -49,6 +49,6 @@ labelsname = schaefer_400.labels                                                
 
 bolddata = '/Users/qingchen/Documents/code/Data/roi_fc/sub-0062_task-rest_space-MNI152NLin6Asym_res-2_desc-denoisedSmoothed_bold.nii.gz'
 
-correlation_matrix = correlation_matrix(atlas_filename,labelsname,bolddata)
-plot_correlation_matrix(correlation_matrix,labelsname)
+correlation_matrix = correlation_matrix(atlas_filename, labelsname, bolddata)
+plot_correlation_matrix(correlation_matrix, labelsname)
 

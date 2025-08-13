@@ -44,7 +44,7 @@ def plot_correlation_matrix(correlation_matrix,labels):
         reorder=True,
     )
     plotting.show()
-def subc_timeseries(data,atlaspath):
+def subc_timeseries(data, atlaspath):
     data = data.transpose(3, 0, 1, 2)
     atlasData = nib.load(atlaspath).get_fdata()
 

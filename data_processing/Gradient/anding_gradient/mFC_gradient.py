@@ -12,7 +12,7 @@ filename = ['hc_v2', 'hc001_50_v01', 'hc051_114_v01', 'MDDv1', 'MDDv2']
 #filename = ['hc_v2', 'hc001_114_v01', 'MDDv1', 'MDDv2']
 path = '/Volumes/qingchen/anding/gradient/'
 databox = []
-box = np.zeros([400,400])
+box = np.zeros([400, 400])
 reference = scio.loadmat('./reference.mat')
 for i in filename:
     print('>====== ', i, ' ======<')
@@ -22,7 +22,7 @@ for i in filename:
         print(j)
         m = scio.loadmat(j)
         fisherzFC = np.arctanh(m['data'])
-        box = np.add(box,fisherzFC)
+        box = np.add(box, fisherzFC)
     mFC = box / len(FCpath)
     print(mFC)
     mFC = np.tanh(mFC)
@@ -32,6 +32,7 @@ for i in filename:
     gp = GradientMaps(kernel='normalized_angle', approach='pca', alignment='procrustes', n_components=10,
                       random_state=0)
     gp.fit(mFC, reference=reference['data'])
+
     res = gp.gradients_
 
     labeling = load_parcellation('schaefer', scale=400, join=True)

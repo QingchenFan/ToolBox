@@ -20,7 +20,7 @@ for i in filename:
 print(len(databox))
 
 
-gp = GradientMaps(kernel='normalized_angle',approach='pca', alignment='procrustes', n_components=10, random_state=0)
+gp = GradientMaps(kernel='normalized_angle', approach='pca', alignment='procrustes', n_components=10, random_state=0)
 gp.fit(databox)
 ref = gp.gradients_
 print(len(ref))
