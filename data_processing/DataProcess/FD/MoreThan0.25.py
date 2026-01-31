@@ -5,7 +5,7 @@ fl = glob.glob(path)
 for i in fl:
     id = i[i.index('sub-'):i.index('sub-')+15]
 
-    conf = pd.read_csv(i,sep='\t')
+    conf = pd.read_csv(i, sep='\t')
     fd = conf['framewise_displacement'][1:239]
     a = fd[fd > 0.20]
     res = len(a) / len(fd)

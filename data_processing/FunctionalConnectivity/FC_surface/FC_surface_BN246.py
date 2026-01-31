@@ -5,6 +5,7 @@ import nibabel as nib
 from nilearn.maskers import NiftiMasker
 from scipy.io import savemat
 from nilearn import plotting
+import pandas as pd
 def volume_from_cifti(data, axis):
     assert isinstance(axis, nib.cifti2.BrainModelAxis)
     data = data.T[axis.volume_mask]                          # Assume brainmodels axis is last, move it to front
@@ -111,6 +112,10 @@ def calculate_FC(dpath,tpath,atlaspath,regions):
     print('FC shape : ', resFC.shape)
     return resFC
 
+def get_region_names(csv_path='/Users/qingchen/Documents/Data/template/BrainnetomeAtlas/region246_network_Yeo.csv'):
+    df = pd.read_csv(csv_path)
+    names = df['regions'].tolist()
+    return names
 
 datapath = '/Volumes/QCI/NormativeModel/DuiLie/MDD/dtseriesnii/*ap*'
 tpath = '/Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_freesurfer/fsaverage/fsaverage_LR32k/fsaverage.BN_Atlas.32k_fs_LR.dlabel.nii'
